@@ -29,7 +29,7 @@ class Note(db.Model):
     last_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=True)
-    tags = db.Column(db.String(200))  # Comma-separated tags
+    # tags = db.Column(db.String(200))  # Comma-separated tags
     content = db.Column(db.Text)  # Change from String to Text for rich content
     attachments = db.relationship('Attachment', backref='note', lazy=True)
     shared_notes = db.relationship('SharedNote', backref='note', lazy=True)
