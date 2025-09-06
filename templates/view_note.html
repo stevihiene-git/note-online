@@ -1,0 +1,32 @@
+<!-- templates/view_note.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>{{ note.title }}</h4>
+                <div>
+                    <a href="{{ url_for('views.edit_note', note_id=note.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a href="{{ url_for('views.delete_note', note_id=note.id) }}" class="btn btn-sm btn-outline-danger" 
+                       onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ note.content | replace('\n', '<br>') | safe }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                <small>
+                    Created: {{ note.date_created.strftime('%Y-%m-%d %H:%M') }}
+                    {% if note.last_updated and note.last_updated != note.date_created %}
+                    | Last updated: {{ note.last_updated.strftime('%Y-%m-%d %H:%M') }}
+                    {% endif %}
+                </small>
+            </div>
+        </div>
+        <div class="mt-3">
+            <a href="{{ url_for('views.home') }}" class="btn btn-secondary">Back to Notes</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
