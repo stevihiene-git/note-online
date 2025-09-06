@@ -34,7 +34,7 @@ class Note(db.Model):
     attachments = db.relationship('Attachment', backref='note', lazy=True)
     shared_notes = db.relationship('SharedNote', backref='note', lazy=True)
     # category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=True)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id')) 
+    # category_id = db.Column(db.Integer, db.ForeignKey('category.id')) 
 
 
 
