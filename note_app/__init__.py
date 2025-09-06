@@ -68,8 +68,7 @@ def create_app():
     login_manager.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
-    migrate = Migrate(app, db)
-    
+     
     # Login manager configuration
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'info'
@@ -94,3 +93,4 @@ def create_app():
     
 
     return app
+
