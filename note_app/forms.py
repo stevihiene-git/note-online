@@ -25,7 +25,7 @@ class NoteForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Save Note')
     category_id = SelectField('Category', coerce=int, choices=[])
-    tags = StringField('Tags (comma-separated)')
+    # tags = StringField('Tags (comma-separated)')
 
 class EditNoteForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -36,4 +36,5 @@ class EditNoteForm(FlaskForm):
 class CategoryForm(FlaskForm):
     name = StringField('Category Name', validators=[DataRequired(), Length(max=50)])
     color = StringField('Color', default='#6c757d')
+
     submit = SubmitField('Create Category')
