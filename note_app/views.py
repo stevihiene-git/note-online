@@ -16,15 +16,11 @@ views2 = Blueprint('views', __name__,template_folder='public')
 @views2.route('/', methods=['GET', 'POST'])
 @views2.route('/home', methods=['GET', 'POST'])
 def home():
-    form = SimpleNoteForm()  # Use the simple form instead
-    
+   
+    form = NoteForm()
     if form.validate_on_submit():
         if current_user.is_authenticated:
-            note = Note(
-                title=form.title.data, 
-                content=form.content.data, 
-                user_id=current_user.id
-            )
+            note = Note(title=form.title.data, content=form.content.data, user_id=current_user.id)
             db.session.add(note)
             db.session.commit()
             flash('Your note has been saved!', 'success')
@@ -32,17 +28,6 @@ def home():
         else:
             flash('You need to be logged in to save notes.', 'warning')
             return redirect(url_for('auth.login'))
-    # form = NoteForm()
-    # if form.validate_on_submit():
-    #     if current_user.is_authenticated:
-    #         note = Note(title=form.title.data, content=form.content.data, user_id=current_user.id)
-    #         db.session.add(note)
-    #         db.session.commit()
-    #         flash('Your note has been saved!', 'success')
-    #         return redirect(url_for('views.home'))
-    #     else:
-    #         flash('You need to be logged in to save notes.', 'warning')
-    #         return redirect(url_for('auth.login'))
     
     notes = []
     if current_user.is_authenticated:
@@ -266,3 +251,4 @@ def search_notes():
     
 
     return render_template('search.html', notes=notes, query=query)
+
